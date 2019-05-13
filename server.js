@@ -33,6 +33,11 @@ app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db)})
 app.put('/image', (req, res) => { image.handleImage(req, res, db)})
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
 
+app.listen(process.env.PORT || 3500, ()=> {
+  console.log(`The server is running on ${process.env.PORT}`);
+})
+
+
 
 
 // app.get('/', (req, res) => {
@@ -125,12 +130,6 @@ app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
 //   })
 //   .catch(err => res.status(400).json('unable to get entries'))
 // })
-
-
-app.listen(3500, ()=> {
-  console.log('app is running on port 3500');
-})
-
 
 
 /*
