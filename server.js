@@ -33,8 +33,9 @@ app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
 app.delete('/deleteuser', (req, res) => {
   const { id } = req.body;
     // db.select('*').from('users').where({id}).del();
-    db.select('*').from('login').where({id}).del();
-    return res.json('user deleted');
+    db.select('*').from('login').where('id', '=', id ).del();
+    return res.status(200).json('user deleted');
+    
 })
 
 app.listen(process.env.PORT || 3500, ()=> {
