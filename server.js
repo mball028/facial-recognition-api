@@ -32,10 +32,12 @@ app.put('/image', (req, res) => { image.handleImage(req, res, db)})
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
 app.delete('/deleteuser', (req, res) => {
   const { id } = req.body;
-  console.log(id);
-    // db.select('*').from('users').where({id}).del();
-    db.select('id').from('login').where('id', '=', id ).del();
-    return res.status(200).json('user deleted');
+  if(!id){
+    return res.status(400).json('no user with such id');
+  }
+    db.select('*').from('login').where('id', '=', id ).del()
+   return  res.status(200).json('user deleted');
+     
     
 })
 
