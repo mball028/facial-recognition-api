@@ -3,6 +3,7 @@ const handleSignin = (db, bcrypt) => (req, res) => {
     if (!email || !password) {
       return res.status(400).json('incorrect form submission');
     }
+    // if email and password from the frontend match the login db, load user via email from users db
     db.select('email', 'hash').from('login')
       .where('email', '=', email)
       .then(data => {
