@@ -35,10 +35,8 @@ app.delete('/deleteuser', (req, res) => {
   if(!id){
     return res.status(400).json('no user with such id');
   }
-    db.select('*').from('login').where({id}).del()
+    db.select('*').from('login').where({id: id}).del()
    return  res.status(200).json('user deleted');
-     
-    
 })
 
 app.listen(process.env.PORT || 3500, ()=> {
