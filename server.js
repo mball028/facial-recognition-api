@@ -30,6 +30,12 @@ app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcry
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db)})
 app.put('/image', (req, res) => { image.handleImage(req, res, db)})
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
+app.delete('/deleteuser', (req, res) => {
+  const { id } = req.body;
+    // db.select('*').from('users').where({id}).del();
+    db.select('*').from('login').where({id}).del();
+    return res.json('user deleted');
+})
 
 app.listen(process.env.PORT || 3500, ()=> {
   console.log(`The server is running on ${process.env.PORT}`);
