@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex');
-
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 const profile = require('./controllers/profile');
@@ -32,11 +31,14 @@ app.put('/image', (req, res) => { image.handleImage(req, res, db)})
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
 app.delete('/deleteuser', (req, res) => {
   const { id } = req.body;
-  // if(!id){
-  //   return res.status(400).json('no user with such id');
-  // }
-    db.from('login').where({id: id}).del()
-   return  res.status(200).json('user deleted');
+    db.from('login').where({id: id})
+    .del()
+    .then(() => {
+      db.select()
+        .from('login')
+        .then((login) => res.send(login));
+    })
+  //  return  res.status(200).json('user deleted');
 })
 
 app.listen(process.env.PORT || 3500, ()=> {
