@@ -31,7 +31,7 @@ app.put('/image', (req, res) => { image.handleImage(req, res, db)})
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
 app.delete('/deleteuser', async (req, res) => {
   const { email } = req.body;
-   await db.from('login').where('email', '=', email)
+   await db.from('login').where({email})
     .del()
     .then(() => {
       db.select()
