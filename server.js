@@ -31,12 +31,12 @@ app.put('/image', (req, res) => { image.handleImage(req, res, db)})
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
 app.delete('/deleteuser', async (req, res) => {
   const { email } = req.body;
-   await db.from('login').where({email})
+   await db.from('login', 'users').where({email})
     .del()
     .then(() => {
       db.select()
-        .from('login')
-        .then((login) => res.send(login));
+        .from('login', 'users')
+        .then((login, users) => res.send(login, users));
     })
   //  return  res.status(200).json('user deleted');
 })
